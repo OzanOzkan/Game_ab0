@@ -7,7 +7,7 @@ public class InfoScreenButtonController : InfoScreenBehavior {
     
     private int m_iCurrentScreen = 0;
 
-    public void NextButtonPressed()
+    public void OnNextButtonPressed()
     {
         if (m_iCurrentScreen < m_lCanvasList.Count - 1)
         {
@@ -22,7 +22,7 @@ public class InfoScreenButtonController : InfoScreenBehavior {
         }
     }
 
-    public void BackButtonPressed()
+    public void OnBackButtonPressed()
     {
         SceneManager.LoadScene(Scenes.MainMenu);
     }
