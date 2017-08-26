@@ -4,44 +4,52 @@ using UnityEngine;
 
 public class CBloodTypeB : IBloodType
 {
-    public CBloodTypeB() { }
-
-    protected void Initialize(Vector3 position)
-    {
-        BloodType = Type.B;
-        Text = "b-";
-        Object = Resources.Load("Prefabs/blood_dark");
-        Object = Instantiate(Object, position, Quaternion.identity);
-        FindObjectOfType<TextMesh>().text = Text;
-    }
+    public CBloodTypeB() {}
 
     public static CBloodTypeB CreateInstance(Vector3 position)
     {
-        CBloodTypeB returnInstance = (CBloodTypeB)ScriptableObject.CreateInstance(typeof(CBloodTypeB));
-        returnInstance.Initialize(position);
+        Object tempObject = Resources.Load("Prefabs/blood_dark");
+        tempObject = Instantiate(tempObject, position, Quaternion.identity);
+        ((GameObject)tempObject).AddComponent<CBloodTypeB>();
 
-        return returnInstance;
+        CBloodTypeB parameters = ((GameObject)tempObject).GetComponent<CBloodTypeB>();
+        parameters.Object = tempObject;
+        parameters.OriginalPosition = position;
+        parameters.BloodType = Type.B;
+        parameters.Text = "b-";
+
+        parameters.BloodExchangeList = new List<Type>();
+        parameters.BloodExchangeList.Add(Type.B);
+        parameters.BloodExchangeList.Add(Type.AB);
+
+        FindObjectOfType<TextMesh>().text = parameters.Text;
+
+        return parameters;
     }
 }
 
 public class CBloodTypeBrh : IBloodType
 {
-    public CBloodTypeBrh() { }
-
-    protected void Initialize(Vector3 position)
-    {
-        BloodType = Type.Brh;
-        Text = "b+";
-        Object = Resources.Load("Prefabs/blood_light");
-        Object = Instantiate(Object, position, Quaternion.identity);
-        FindObjectOfType<TextMesh>().text = Text;
-    }
+    public CBloodTypeBrh() {}
 
     public static CBloodTypeBrh CreateInstance(Vector3 position)
     {
-        CBloodTypeBrh returnInstance = (CBloodTypeBrh)ScriptableObject.CreateInstance(typeof(CBloodTypeBrh));
-        returnInstance.Initialize(position);
+        Object tempObject = Resources.Load("Prefabs/blood_light");
+        tempObject = Instantiate(tempObject, position, Quaternion.identity);
+        ((GameObject)tempObject).AddComponent<CBloodTypeBrh>();
 
-        return returnInstance;
+        CBloodTypeBrh parameters = ((GameObject)tempObject).GetComponent<CBloodTypeBrh>();
+        parameters.Object = tempObject;
+        parameters.OriginalPosition = position;
+        parameters.BloodType = Type.Brh;
+        parameters.Text = "b+";
+
+        parameters.BloodExchangeList = new List<Type>();
+        parameters.BloodExchangeList.Add(Type.Brh);
+        parameters.BloodExchangeList.Add(Type.ABrh);
+
+        FindObjectOfType<TextMesh>().text = parameters.Text;
+
+        return parameters;
     }
 }
