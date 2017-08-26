@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IBloodType : ScriptableObject {
 
+    public IBloodType() { }
+
     public enum Type
     {
         A = 0,
@@ -16,10 +18,10 @@ public class IBloodType : ScriptableObject {
         ZEROrh
     }
 
-    protected static Type m_eBloodType;
-    protected static Object m_Object;
-    protected static string m_sText;
-    protected static List<Type> m_bloodExchangeList;
+    private Type m_eBloodType;
+    private Object m_Object;
+    private string m_sText;
+    private List<Type> m_bloodExchangeList;
     
 
     public Type BloodType
@@ -34,8 +36,9 @@ public class IBloodType : ScriptableObject {
         set { m_sText = value; }
     }
 
-    public Object GetObject
+    public Object Object
     {
         get { return m_Object; }
+        set { m_Object = value;}
     }
 }

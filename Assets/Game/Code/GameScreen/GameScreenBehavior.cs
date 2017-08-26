@@ -24,8 +24,8 @@ public class GameScreenBehavior : Game {
 
         IBloodType myBloodType = CBloodTypeA.CreateInstance(GameObject.Find("blood_position_1").transform.position);
         IBloodType myBloodType2 = CBloodTypeArh.CreateInstance(GameObject.Find("blood_position_2").transform.position);
-        IBloodType myBloodType3 = CBloodTypeA.CreateInstance(GameObject.Find("blood_position_3").transform.position);
-        IBloodType myBloodType4 = CBloodTypeArh.CreateInstance(GameObject.Find("blood_position_4").transform.position);
+        IBloodType myBloodType3 = CBloodTypeB.CreateInstance(GameObject.Find("blood_position_3").transform.position);
+        IBloodType myBloodType4 = CBloodTypeBrh.CreateInstance(GameObject.Find("blood_position_4").transform.position);
 
         if (myBloodType.BloodType == IBloodType.Type.A)
             Debug.Log("Type A");
