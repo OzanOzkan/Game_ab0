@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CBloodTypeB : IBloodType
-{
-    public CBloodTypeB() {}
+public class CBloodTypeAB : IBloodType {
 
-    public static CBloodTypeB CreateInstance(Vector3 position)
+    public CBloodTypeAB() { }
+
+    public static CBloodTypeAB CreateInstance(Vector3 position)
     {
         Object tempObject = Resources.Load("Prefabs/blood_dark");
         tempObject = Instantiate(tempObject, position, Quaternion.identity);
-        ((GameObject)tempObject).AddComponent<CBloodTypeB>();
+        ((GameObject)tempObject).AddComponent<CBloodTypeAB>();
 
-        CBloodTypeB parameters = ((GameObject)tempObject).GetComponent<CBloodTypeB>();
+        CBloodTypeAB parameters = ((GameObject)tempObject).GetComponent<CBloodTypeAB>();
         parameters.Object = tempObject;
         parameters.OriginalPosition = position;
-        parameters.BloodType = Type.B;
+        parameters.BloodType = Type.AB;
         parameters.Text = getBloodTypeAsString(parameters.BloodType).ToLower();
 
         parameters.BloodExchangeList = new List<Type>();
-        parameters.BloodExchangeList.Add(Type.B);
         parameters.BloodExchangeList.Add(Type.AB);
 
         FindObjectOfType<TextMesh>().text = parameters.Text;
@@ -28,24 +27,23 @@ public class CBloodTypeB : IBloodType
     }
 }
 
-public class CBloodTypeBrh : IBloodType
+public class CBloodTypeABrh : IBloodType
 {
-    public CBloodTypeBrh() {}
+    public CBloodTypeABrh() { }
 
-    public static CBloodTypeBrh CreateInstance(Vector3 position)
+    public static CBloodTypeABrh CreateInstance(Vector3 position)
     {
         Object tempObject = Resources.Load("Prefabs/blood_light");
         tempObject = Instantiate(tempObject, position, Quaternion.identity);
-        ((GameObject)tempObject).AddComponent<CBloodTypeBrh>();
+        ((GameObject)tempObject).AddComponent<CBloodTypeABrh>();
 
-        CBloodTypeBrh parameters = ((GameObject)tempObject).GetComponent<CBloodTypeBrh>();
+        CBloodTypeABrh parameters = ((GameObject)tempObject).GetComponent<CBloodTypeABrh>();
         parameters.Object = tempObject;
         parameters.OriginalPosition = position;
-        parameters.BloodType = Type.Brh;
+        parameters.BloodType = Type.ABrh;
         parameters.Text = getBloodTypeAsString(parameters.BloodType).ToLower();
 
         parameters.BloodExchangeList = new List<Type>();
-        parameters.BloodExchangeList.Add(Type.Brh);
         parameters.BloodExchangeList.Add(Type.ABrh);
 
         FindObjectOfType<TextMesh>().text = parameters.Text;

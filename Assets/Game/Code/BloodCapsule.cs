@@ -1,32 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class BloodCapsule : Game
+public class BloodCapsule : IBloodType
 {
-    private IBloodType.Type m_bloodType;
+    public static BloodCapsule CreateInstance(Type bloodType, Vector3 position)
+    {
+        Object tempObject = Resources.Load("Prefabs/blood_capsule");
+        tempObject = Instantiate(tempObject, position, Quaternion.identity);
+        ((GameObject)tempObject).AddComponent<BloodCapsule>();
 
-    public IBloodType.Type BloodType { get { return m_bloodType; } set { m_bloodType = value; } }
+        BloodCapsule parameters = ((GameObject)tempObject).GetComponent<BloodCapsule>();
+        parameters.Object = tempObject;
+        parameters.OriginalPosition = position;
+        parameters.BloodType = bloodType;
+        parameters.Text = getBloodTypeAsString(bloodType).ToLower();
+
+        FindObjectOfType<TextMesh>().text = parameters.Text;
+
+        return parameters;
+    }
 
     // Use this for initialization
     void Start()
     {
-        FindObjectOfType<TextMesh>().text = m_bloodType.ToString().ToLower(); 
+
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
-      //  Debug.Log("a");
+      
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IBloodType droppedBloodType = collision.gameObject.GetComponent<IBloodType>();
 
-        if (droppedBloodType.canGiveBloodTo(m_bloodType))
-            Debug.Log("Can get dropped blood type.");
+        if (droppedBloodType.canGiveBloodTo(BloodType))
+        {
+            Game.State.CurrentScore += Game.Rules.CorrectAnswerScore;
+            SceneManager.LoadScene(Game.Scenes.GameScreen);
+        }
         else
+        {
+            //SceneManager.LoadScene(Game.Scenes.InfoScreen);
             droppedBloodType.sendBackToOriginalPosition();
+        }
     }
 }

@@ -9,12 +9,12 @@ public class IBloodType : Game {
     public enum Type
     {
         A = 0,
-        Arh,
         B,
-        Brh,
-        AB,
-        ABrh,
         ZERO,
+        AB,
+        Arh,
+        Brh,
+        ABrh,
         ZEROrh
     }
 
@@ -62,6 +62,22 @@ public class IBloodType : Game {
     public void sendBackToOriginalPosition()
     {
         ((GameObject)Object).transform.position = new Vector3(m_originalPosition.x, m_originalPosition.y);
+    }
+
+    public static string getBloodTypeAsString(Type type)
+    {
+        if (type == Type.Arh)
+            return "A+";
+        else if (type == Type.ABrh)
+            return "AB+";
+        else if (type == Type.Brh)
+            return "B+";
+        else if (type == Type.ZEROrh)
+            return "0+";
+        else if (type == Type.ZERO)
+            return "0-";
+        else
+            return type.ToString() + "-";
     }
 
     public void Update()

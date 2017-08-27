@@ -16,7 +16,7 @@ public class CBloodTypeA : IBloodType
         parameters.Object = tempObject;
         parameters.OriginalPosition = position;
         parameters.BloodType = Type.A;
-        parameters.Text = "a-";
+        parameters.Text = getBloodTypeAsString(parameters.BloodType).ToLower();
 
         parameters.BloodExchangeList = new List<Type>();
         parameters.BloodExchangeList.Add(Type.A);
@@ -42,11 +42,11 @@ public class CBloodTypeArh : IBloodType
         parameters.Object = tempObject;
         parameters.OriginalPosition = position;
         parameters.BloodType = Type.Arh;
-        parameters.Text = "a+";
+        parameters.Text = getBloodTypeAsString(parameters.BloodType).ToLower();
 
         parameters.BloodExchangeList = new List<Type>();
         parameters.BloodExchangeList.Add(Type.Arh);
-        parameters.BloodExchangeList.Add(Type.AB);
+        parameters.BloodExchangeList.Add(Type.ABrh);
 
         FindObjectOfType<TextMesh>().text = parameters.Text;
 

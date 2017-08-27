@@ -10,12 +10,16 @@ public class Game : MonoBehaviour {
         public static string MainMenu { get { return "MainMenu"; } }
         public static string InfoScreen { get { return "InfoScreen"; } }
         public static string GameScreen { get { return "GameScreen"; } }
+        public static string ScoreScreen { get { return "ScoreScreen"; } }
     }
 
     // Rules
     protected static class Rules
     {
-        public static float MoveTimeLimit { get { return 10; } }
+        public static float MoveTimeLimit { get { return 20; } }
+        public static float MoveTimeLimitReduceAmount { get { return 2; } }
+        public static float MinReducedTimeLimit { get { return 3; } }
+        public static int CorrectAnswerScore { get { return 10; } }
     }
 
     // Difficulty
@@ -29,7 +33,6 @@ public class Game : MonoBehaviour {
         }
 
         private static Difficulty.Levels m_currentDifficulty;
-
         public static Difficulty.Levels Current
         {
             get { return m_currentDifficulty; }
@@ -45,6 +48,13 @@ public class Game : MonoBehaviour {
         {
             get { return m_iCurrentScore; }
             set { m_iCurrentScore = value; }
+        }
+
+        private static int m_iMaxScore;
+        public static int MaxScore
+        {
+            get { return m_iMaxScore; }
+            set { m_iMaxScore = value; }
         }
     }
 }
