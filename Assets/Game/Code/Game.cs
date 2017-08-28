@@ -43,14 +43,14 @@ public class Game : MonoBehaviour {
     // States
     protected static class State
     {
-        private static int m_iCurrentScore;
+        private static int m_iCurrentScore = 0;
         public static int CurrentScore
         {
             get { return m_iCurrentScore; }
             set { m_iCurrentScore = value; }
         }
 
-        private static int m_iMaxScore;
+        private static int m_iMaxScore = 0;
         public static int MaxScore
         {
             get { return m_iMaxScore; }

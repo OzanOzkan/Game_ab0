@@ -27,7 +27,4 @@ public class MainMenuButtonController : MainMenuBehavior {
         Game.Difficulty.Current = Difficulty.Levels.eDL_HARD;
         SceneManager.LoadScene(Scenes.GameScreen);
     }
-
-	// Use this for initialization
-	void Start () {	}
 }

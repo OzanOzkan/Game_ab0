@@ -8,14 +8,14 @@ public class IBloodType : Game {
 
     public enum Type
     {
-        A = 0,
+        Arh = 0,
+        Brh,
+        ZEROrh,
+        ABrh,
+        A,
         B,
         ZERO,
         AB,
-        Arh,
-        Brh,
-        ABrh,
-        ZEROrh
     }
 
     private Type m_eBloodType;
@@ -23,6 +23,8 @@ public class IBloodType : Game {
     private Vector2 m_originalPosition;
     private string m_sText;
     private List<Type> m_bloodExchangeList;
+
+    private static GameObject m_currentDraggedBlood;
 
     public Type BloodType
     {
@@ -88,10 +90,15 @@ public class IBloodType : Game {
 
         if (isOnBlood && Input.GetMouseButton(0))
         {
-            ((GameObject)Object).transform.position = new Vector3(touchPosition.x, touchPosition.y);
+            if (!m_currentDraggedBlood)
+                m_currentDraggedBlood = ((GameObject)Object);
+
+            if(m_currentDraggedBlood == gameObject)
+                ((GameObject)Object).transform.position = new Vector3(touchPosition.x, touchPosition.y);
         }
         else
         {
+            m_currentDraggedBlood = null;
             sendBackToOriginalPosition();
         }
 

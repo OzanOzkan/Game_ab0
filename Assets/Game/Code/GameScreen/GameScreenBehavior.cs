@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameScreenBehavior : Game {
 
@@ -33,6 +34,7 @@ public class GameScreenBehavior : Game {
         {
             // Time is up.
             m_txtTimer.text = 0.ToString();
+            SceneManager.LoadScene(Game.Scenes.ScoreScreen);
         }
 	}
 
@@ -58,13 +60,31 @@ public class GameScreenBehavior : Game {
         IBloodType m_bloodCapsule = BloodCapsule.CreateInstance(bloodTypeForCapsule, GameObject.Find("capsule_position").transform.position);
 
         List<IBloodType.Type> generatedBloodTypes = new List<IBloodType.Type>();
-
-        while(generatedBloodTypes.Count < maxGeneratedBloodTypeCount)
+        
+        if(Game.Difficulty.Current == Game.Difficulty.Levels.eDL_EASY)
         {
-            IBloodType.Type bloodTypeToGenerate = (IBloodType.Type)Random.Range(0, maxBloodTypeIndex);
+            generatedBloodTypes.Add(IBloodType.Type.Arh);
+            generatedBloodTypes.Add(IBloodType.Type.Brh);
+            generatedBloodTypes.Add(IBloodType.Type.ZEROrh);
+            generatedBloodTypes = Utilities<IBloodType.Type>.shuffleList(generatedBloodTypes);
+        }
+        else if (Game.Difficulty.Current == Game.Difficulty.Levels.eDL_MEDIUM)
+        {
+            generatedBloodTypes.Add(IBloodType.Type.Arh);
+            generatedBloodTypes.Add(IBloodType.Type.Brh);
+            generatedBloodTypes.Add(IBloodType.Type.ZEROrh);
+            generatedBloodTypes.Add(IBloodType.Type.ABrh);
+            generatedBloodTypes = Utilities<IBloodType.Type>.shuffleList(generatedBloodTypes);
+        }
+        else
+        {
+            while (generatedBloodTypes.Count < maxGeneratedBloodTypeCount)
+            {
+                IBloodType.Type bloodTypeToGenerate = (IBloodType.Type)Random.Range(0, maxBloodTypeIndex);
 
-            if (!generatedBloodTypes.Contains(bloodTypeToGenerate))
-                generatedBloodTypes.Add(bloodTypeToGenerate);
+                if (!generatedBloodTypes.Contains(bloodTypeToGenerate))
+                    generatedBloodTypes.Add(bloodTypeToGenerate);
+            }
         }
 
         if(!generatedBloodTypes.Contains(bloodTypeForCapsule))
@@ -73,25 +93,31 @@ public class GameScreenBehavior : Game {
             generatedBloodTypes[indexToChange] = bloodTypeForCapsule;
         }
 
+        string positionString;
+        if (Game.Difficulty.Current == Game.Difficulty.Levels.eDL_EASY)
+            positionString = "easy_blood_position_";
+        else
+            positionString = "blood_position_";
+
         int i = 1;
         foreach (IBloodType.Type bloodType in generatedBloodTypes)
         {
             if (bloodType == IBloodType.Type.A)
-                returnList.Add(CBloodTypeA.CreateInstance(GameObject.Find("blood_position_" + i.ToString()).transform.position));
+                returnList.Add(CBloodTypeA.CreateInstance(GameObject.Find(positionString + i.ToString()).transform.position));
             else if (bloodType == IBloodType.Type.Arh)
-                returnList.Add(CBloodTypeArh.CreateInstance(GameObject.Find("blood_position_" + i.ToString()).transform.position));
+                returnList.Add(CBloodTypeArh.CreateInstance(GameObject.Find(positionString + i.ToString()).transform.position));
             else if (bloodType == IBloodType.Type.B)
-                returnList.Add(CBloodTypeB.CreateInstance(GameObject.Find("blood_position_" + i.ToString()).transform.position));
+                returnList.Add(CBloodTypeB.CreateInstance(GameObject.Find(positionString + i.ToString()).transform.position));
             else if (bloodType == IBloodType.Type.Brh)
-                returnList.Add(CBloodTypeBrh.CreateInstance(GameObject.Find("blood_position_" + i.ToString()).transform.position));
+                returnList.Add(CBloodTypeBrh.CreateInstance(GameObject.Find(positionString + i.ToString()).transform.position));
             else if (bloodType == IBloodType.Type.AB)
-                returnList.Add(CBloodTypeAB.CreateInstance(GameObject.Find("blood_position_" + i.ToString()).transform.position));
+                returnList.Add(CBloodTypeAB.CreateInstance(GameObject.Find(positionString + i.ToString()).transform.position));
             else if (bloodType == IBloodType.Type.ABrh)
-                returnList.Add(CBloodTypeABrh.CreateInstance(GameObject.Find("blood_position_" + i.ToString()).transform.position));
+                returnList.Add(CBloodTypeABrh.CreateInstance(GameObject.Find(positionString + i.ToString()).transform.position));
             else if (bloodType == IBloodType.Type.ZERO)
-                returnList.Add(CBloodTypeZero.CreateInstance(GameObject.Find("blood_position_" + i.ToString()).transform.position));
+                returnList.Add(CBloodTypeZero.CreateInstance(GameObject.Find(positionString + i.ToString()).transform.position));
             else
-                returnList.Add(CBloodTypeZerorh.CreateInstance(GameObject.Find("blood_position_" + i.ToString()).transform.position));
+                returnList.Add(CBloodTypeZerorh.CreateInstance(GameObject.Find(positionString + i.ToString()).transform.position));
 
             ++i;
         }

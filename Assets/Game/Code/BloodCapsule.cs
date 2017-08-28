@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class BloodCapsule : IBloodType
 {
+    bool triggered;
+
     public static BloodCapsule CreateInstance(Type bloodType, Vector3 position)
     {
         Object tempObject = Resources.Load("Prefabs/blood_capsule");
@@ -25,7 +27,7 @@ public class BloodCapsule : IBloodType
     // Use this for initialization
     void Start()
     {
-
+        triggered = false;
     }
 
     // Update is called once per frame
@@ -36,17 +38,25 @@ public class BloodCapsule : IBloodType
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IBloodType droppedBloodType = collision.gameObject.GetComponent<IBloodType>();
+        if (!triggered)
+        {
+            IBloodType droppedBloodType = collision.gameObject.GetComponent<IBloodType>();
 
-        if (droppedBloodType.canGiveBloodTo(BloodType))
-        {
-            Game.State.CurrentScore += Game.Rules.CorrectAnswerScore;
-            SceneManager.LoadScene(Game.Scenes.GameScreen);
-        }
-        else
-        {
-            //SceneManager.LoadScene(Game.Scenes.InfoScreen);
-            droppedBloodType.sendBackToOriginalPosition();
+            if (droppedBloodType.canGiveBloodTo(BloodType))
+            {
+                Game.State.CurrentScore += Game.Rules.CorrectAnswerScore;
+
+                if (Game.State.CurrentScore > Game.State.MaxScore)
+                    Game.State.MaxScore = Game.State.CurrentScore;
+
+                SceneManager.LoadScene(Game.Scenes.GameScreen);
+            }
+            else
+            {
+                SceneManager.LoadScene(Game.Scenes.ScoreScreen);
+            }
+
+            triggered = true;
         }
     }
 }
