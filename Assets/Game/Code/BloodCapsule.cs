@@ -49,6 +49,9 @@ public class BloodCapsule : IBloodType
                 if (Game.State.CurrentScore > Game.State.MaxScore)
                     Game.State.MaxScore = Game.State.CurrentScore;
 
+                if (Game.State.CorrectAnswers < 5)
+                    ++Game.State.CorrectAnswers;
+
                 SceneManager.LoadScene(Game.Scenes.GameScreen);
             }
             else

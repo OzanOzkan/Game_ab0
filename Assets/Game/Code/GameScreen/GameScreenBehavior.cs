@@ -18,6 +18,12 @@ public class GameScreenBehavior : Game {
         m_txtScore = GameObject.Find("txt_score").GetComponent<Text>();
 
         List<IBloodType> m_generatedBloodTypes = GenerateNewBloodElements();
+
+        if(Game.State.CorrectAnswers == 5 && Game.Rules.MoveTimeLimit > Game.Rules.MinReducedTimeLimit)
+        {
+            Game.Rules.MoveTimeLimit -= Game.Rules.MoveTimeLimitReduceAmount;
+            Game.State.CorrectAnswers = 0;
+        }
     }
 	
 	// Update is called once per frame

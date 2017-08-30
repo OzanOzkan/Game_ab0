@@ -16,7 +16,9 @@ public class Game : MonoBehaviour {
     // Rules
     protected static class Rules
     {
-        public static float MoveTimeLimit { get { return 20; } }
+        private static float m_fMoveTimeLimit = 20;
+        public static float MoveTimeLimit { get { return m_fMoveTimeLimit; } set { m_fMoveTimeLimit = value; } }
+
         public static float MoveTimeLimitReduceAmount { get { return 2; } }
         public static float MinReducedTimeLimit { get { return 3; } }
         public static int CorrectAnswerScore { get { return 10; } }
@@ -55,6 +57,13 @@ public class Game : MonoBehaviour {
         {
             get { return m_iMaxScore; }
             set { m_iMaxScore = value; }
+        }
+
+        private static int m_iCorrectAnswers = 0;
+        public static int CorrectAnswers
+        {
+            get { return m_iCorrectAnswers; }
+            set { m_iCorrectAnswers = value; }
         }
     }
 }
