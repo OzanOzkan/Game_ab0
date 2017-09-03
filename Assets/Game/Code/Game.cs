@@ -1,8 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class Game : MonoBehaviour {
+
+    // Advertisement
+    public static void InitAdvertisement()
+    {
+        const string AdvertisementId = "75d4b971-7374-4a0a-a66e-c646b2c5a7fe";
+
+        //if (!Advertisement.isInitialized)
+        //    Advertisement.Initialize(AdvertisementId);
+    }
 
     // Scenes
     protected static class Scenes

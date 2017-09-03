@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class BloodCapsule : IBloodType
 {
-    bool triggered;
+    private bool triggered;
+
+    private SoundManager m_soundManager;
+    private AudioClip m_audioCorrect;
+    private AudioClip m_audioIncorrect;
 
     public static BloodCapsule CreateInstance(Type bloodType, Vector3 position)
     {
@@ -28,6 +32,10 @@ public class BloodCapsule : IBloodType
     void Start()
     {
         triggered = false;
+
+        m_soundManager = GameObject.Find("soundManager").GetComponent<SoundManager>();
+        m_audioCorrect = (AudioClip)Resources.Load("Sounds/correct");
+        m_audioIncorrect = (AudioClip)Resources.Load("Sounds/incorrect");
     }
 
     // Update is called once per frame
@@ -52,10 +60,12 @@ public class BloodCapsule : IBloodType
                 if (Game.State.CorrectAnswers < 5)
                     ++Game.State.CorrectAnswers;
 
+                m_soundManager.Play(m_audioCorrect);
                 SceneManager.LoadScene(Game.Scenes.GameScreen);
             }
             else
             {
+                m_soundManager.Play(m_audioIncorrect);
                 SceneManager.LoadScene(Game.Scenes.ScoreScreen);
             }
 
