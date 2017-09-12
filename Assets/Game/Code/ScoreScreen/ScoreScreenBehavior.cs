@@ -17,6 +17,7 @@ public class ScoreScreenBehavior : Game {
         m_txtMaxScore = GameObject.Find("subtitle_maxscore").GetComponent<Text>();
         m_txtMaxScore.text += Game.State.MaxScore.ToString();
 
-        Game.State.CurrentScore = 0;
+        Game.State.ResetCurrentScore();
+        Game.Rules.ResetMoveTime();
 	}
 }

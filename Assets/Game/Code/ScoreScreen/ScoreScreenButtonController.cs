@@ -14,9 +14,18 @@ public class ScoreScreenButtonController : ScoreScreenBehavior
 
     public void onMainMenuButtonPressed()
     {
-        ShowOptions currentOptions = new ShowOptions();
-        currentOptions.resultCallback = adVideoFinished;
-        Advertisement.Show("endGame", currentOptions);
+        if (Ad.Count == 5)
+        {
+            Ad.Count = 1;
+            ShowOptions currentOptions = new ShowOptions();
+            currentOptions.resultCallback = adVideoFinished;
+            Advertisement.Show("endGame", currentOptions);
+        }
+        else
+        {
+            Ad.Count++;
+            SceneManager.LoadScene(Game.Scenes.MainMenu);
+        }
     }
 
     void adVideoFinished(ShowResult result)

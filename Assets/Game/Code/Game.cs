@@ -6,12 +6,18 @@ using UnityEngine.Advertisements;
 public class Game : MonoBehaviour {
 
     // Advertisement
-    public static void InitAdvertisement()
+    protected static class Ad
     {
-        const string AdvertisementId = "75d4b971-7374-4a0a-a66e-c646b2c5a7fe";
+        private static int m_adCount = 1;
+        public static int Count { get { return m_adCount; } set { m_adCount = value; } }
 
-        //if (!Advertisement.isInitialized)
-        //    Advertisement.Initialize(AdvertisementId);
+        public static void InitAdvertisement()
+        {
+            const string AdvertisementId = "75d4b971-7374-4a0a-a66e-c646b2c5a7fe";
+
+            //if (!Advertisement.isInitialized)
+            //    Advertisement.Initialize(AdvertisementId);
+        }
     }
 
     // Scenes
@@ -32,6 +38,11 @@ public class Game : MonoBehaviour {
         public static float MoveTimeLimitReduceAmount { get { return 2; } }
         public static float MinReducedTimeLimit { get { return 3; } }
         public static int CorrectAnswerScore { get { return 10; } }
+
+        public static void ResetMoveTime()
+        {
+            m_fMoveTimeLimit = 20;
+        }
     }
 
     // Difficulty
@@ -74,6 +85,11 @@ public class Game : MonoBehaviour {
         {
             get { return m_iCorrectAnswers; }
             set { m_iCorrectAnswers = value; }
+        }
+
+        public static void ResetCurrentScore()
+        {
+            m_iCurrentScore = 0;
         }
     }
 }
