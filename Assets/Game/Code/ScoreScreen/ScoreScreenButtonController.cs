@@ -14,9 +14,9 @@ public class ScoreScreenButtonController : ScoreScreenBehavior
 
     public void onMainMenuButtonPressed()
     {
-        if (Ad.Count == 5)
+        if (Ad.Count == 1 || Ad.Count == 5)
         {
-            Ad.Count = 1;
+            Ad.Count++;
             ShowOptions currentOptions = new ShowOptions();
             currentOptions.resultCallback = adVideoFinished;
             Advertisement.Show("endGame", currentOptions);

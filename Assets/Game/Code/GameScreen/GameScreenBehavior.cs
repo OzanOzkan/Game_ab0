@@ -29,12 +29,12 @@ public class GameScreenBehavior : Game {
 	// Update is called once per frame
 	void Update () {
 
-        m_txtScore.text = Game.State.CurrentScore.ToString();
+        m_txtScore.text = Game.State.CurrentScore.ToString("#.#");
 
         if (m_fCurrentTimeLeft > 0)
         {
             m_fCurrentTimeLeft -= Time.deltaTime;
-            m_txtTimer.text = m_fCurrentTimeLeft.ToString("#");
+            m_txtTimer.text = m_fCurrentTimeLeft.ToString("00:##");
         }
         else
         {

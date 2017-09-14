@@ -10,6 +10,7 @@ public class BloodCapsule : IBloodType
     private SoundManager m_soundManager;
     private AudioClip m_audioCorrect;
     private AudioClip m_audioIncorrect;
+    private AnimationManager m_bloodDropAnimation;
 
     public static BloodCapsule CreateInstance(Type bloodType, Vector3 position)
     {
@@ -60,7 +61,13 @@ public class BloodCapsule : IBloodType
                 if (Game.State.CorrectAnswers < 5)
                     ++Game.State.CorrectAnswers;
 
+                Destroy(collision.gameObject);
+
                 m_soundManager.Play(m_audioCorrect);
+
+                Instantiate(Resources.Load("Animations/blood_drop"), collision.transform.position, Quaternion.identity);
+                GameObject.Find("blood_drop(Clone)").AddComponent<AnimationManager>();
+
                 SceneManager.LoadScene(Game.Scenes.GameScreen);
             }
             else
