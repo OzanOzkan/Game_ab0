@@ -9,6 +9,7 @@ public class GameScreenBehavior : Game {
     private float m_fCurrentTimeLeft;
     private Text m_txtTimer;
     private Text m_txtScore;
+    private GameObject m_backgroundMusic;
 
     // Use this for initialization
     void Start () {
@@ -17,6 +18,8 @@ public class GameScreenBehavior : Game {
         m_txtTimer = GameObject.Find("txt_timer").GetComponent<Text>();
         m_txtScore = GameObject.Find("txt_score").GetComponent<Text>();
 
+        m_backgroundMusic = (GameObject)Instantiate(Resources.Load("Prefabs/backgroundMusic"), new Vector3(0, 0, 0), Quaternion.identity);
+        
         List<IBloodType> m_generatedBloodTypes = GenerateNewBloodElements();
 
         if(Game.State.CorrectAnswers == 5 && Game.Rules.MoveTimeLimit > Game.Rules.MinReducedTimeLimit)

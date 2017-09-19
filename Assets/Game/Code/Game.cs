@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using GoogleMobileAds.Api;
 
 public class Game : MonoBehaviour {
 
@@ -11,6 +12,11 @@ public class Game : MonoBehaviour {
         private static int m_adCount = 1;
         public static int Count { get { return m_adCount; } set { m_adCount = value; } }
 
+        private static bool m_rewardBasedEventHandlersSet = false;
+        public static bool isAdRewarded { get; set; }
+        public static bool isAdFailed { get; set; }
+
+        // Unity Monetize implementation.
         public static void InitAdvertisement()
         {
             const string AdvertisementId = "75d4b971-7374-4a0a-a66e-c646b2c5a7fe";
@@ -18,6 +24,63 @@ public class Game : MonoBehaviour {
             //if (!Advertisement.isInitialized)
             //    Advertisement.Initialize(AdvertisementId);
         }
+        // End of Unity Monetize implementation.
+
+        // Google Admob implementation.
+        public static RewardBasedVideoAd RequestRewardBasedVideo()
+        {
+            #if UNITY_ANDROID
+                string adUnitId = "ca-app-pub-6108754085139921/6725596933";
+            #elif UNITY_IPHONE
+                string adUnitId = "";
+            #else
+                string adUnitId = "unexpected_platform";
+            #endif
+
+            RewardBasedVideoAd rewardBasedVideo = RewardBasedVideoAd.Instance;
+
+            AdRequest request = new AdRequest.Builder().Build();
+            rewardBasedVideo.LoadAd(request, adUnitId);
+
+            if (rewardBasedVideo.IsLoaded())
+            {
+                rewardBasedVideo.Show();
+            }
+
+            if(!m_rewardBasedEventHandlersSet)
+            {
+                rewardBasedVideo.OnAdLoaded += HandleOnAdLoaded;
+                rewardBasedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
+                rewardBasedVideo.OnAdFailedToLoad += HandleRewardBasedVideoFailedToLoad;
+
+                m_rewardBasedEventHandlersSet = true;
+            }
+
+            return rewardBasedVideo;
+        }
+
+        public static void HandleOnAdLoaded(object sender, System.EventArgs args)
+        {
+            Debug.Log("OnAdLoaded event received.");
+            // Handle the ad loaded event.
+        }
+
+        public static void HandleRewardBasedVideoRewarded(object sender, Reward args)
+        {
+            isAdRewarded = true;
+            isAdFailed = false;
+
+            Debug.Log("a");
+        }
+
+        public static void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+        {
+            isAdRewarded = false;
+            isAdFailed = true;
+
+            Debug.Log("b");
+        }
+        // End of Google Admob Implementation.
     }
 
     // Scenes

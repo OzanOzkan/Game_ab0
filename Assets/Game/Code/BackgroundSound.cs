@@ -28,9 +28,5 @@ public class BackgroundSound : Game {
 
     private void Update()
     {
-        if(SceneManager.GetActiveScene().name != Game.Scenes.GameScreen)
-        {
-
-        }
     }
 }

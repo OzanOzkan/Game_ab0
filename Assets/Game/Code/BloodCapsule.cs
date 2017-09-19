@@ -73,6 +73,7 @@ public class BloodCapsule : IBloodType
             else
             {
                 m_soundManager.Play(m_audioIncorrect);
+                Destroy(GameObject.Find("backgroundMusic(Clone)"));
                 SceneManager.LoadScene(Game.Scenes.ScoreScreen);
             }
 

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
+using GoogleMobileAds.Api;
 
 public class ScoreScreenButtonController : ScoreScreenBehavior
 {
+    private bool rewardBasedEventHandlersSet = false;
 
     public void onShareButtonPressed()
     {
@@ -17,9 +19,25 @@ public class ScoreScreenButtonController : ScoreScreenBehavior
         if (Ad.Count == 1 || Ad.Count == 5)
         {
             Ad.Count++;
+
+            // Unity Ads
             ShowOptions currentOptions = new ShowOptions();
             currentOptions.resultCallback = adVideoFinished;
             Advertisement.Show("endGame", currentOptions);
+
+            //Game.Ad.RequestRewardBasedVideo();
+
+            //if (Game.Ad.isAdRewarded)
+            //{
+            //    Debug.Log("c");
+            //    Game.Ad.isAdRewarded = false;
+            //    SceneManager.LoadScene(Game.Scenes.MainMenu);
+            //}
+            //else
+            //{
+            //    Debug.Log("d");
+            //    SceneManager.LoadScene(Game.Scenes.ScoreScreen);
+            //}
         }
         else
         {
@@ -28,6 +46,7 @@ public class ScoreScreenButtonController : ScoreScreenBehavior
         }
     }
 
+    // Unity Ads
     void adVideoFinished(ShowResult result)
     {
         if (result == ShowResult.Finished)
@@ -35,6 +54,8 @@ public class ScoreScreenButtonController : ScoreScreenBehavior
         else
             SceneManager.LoadScene(Game.Scenes.ScoreScreen);
     }
+
+
 
     void Start() { }
 }
