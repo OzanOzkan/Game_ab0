@@ -18,7 +18,8 @@ public class GameScreenBehavior : Game {
         m_txtTimer = GameObject.Find("txt_timer").GetComponent<Text>();
         m_txtScore = GameObject.Find("txt_score").GetComponent<Text>();
 
-        m_backgroundMusic = (GameObject)Instantiate(Resources.Load("Prefabs/backgroundMusic"), new Vector3(0, 0, 0), Quaternion.identity);
+        if(Game.SoundSettings.IsSoundOn == 1)
+            m_backgroundMusic = (GameObject)Instantiate(Resources.Load("Prefabs/backgroundMusic"), new Vector3(0, 0, 0), Quaternion.identity);
         
         List<IBloodType> m_generatedBloodTypes = GenerateNewBloodElements();
 
@@ -43,6 +44,7 @@ public class GameScreenBehavior : Game {
         {
             // Time is up.
             m_txtTimer.text = 0.ToString();
+            Destroy(GameObject.Find("backgroundMusic(Clone)"));
             SceneManager.LoadScene(Game.Scenes.ScoreScreen);
         }
 	}

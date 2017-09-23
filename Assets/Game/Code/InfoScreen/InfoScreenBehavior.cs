@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InfoScreenBehavior : Game {
 
@@ -10,6 +11,13 @@ public class InfoScreenBehavior : Game {
 
     // Use this for initialization
     void Start () {
+        // Localization Texts
+        Game.Localization.InitLocalization();
+
+        //GameObject.Find("subtitle_info").GetComponent<Text>().text
+        //    = Game.Localization.GetText(Application.systemLanguage.ToString(), "infoscreen_subtitle_1");
+        //GameObject.Find("subtitle_info").GetComponent<Text>().text
+        //    = Game.Localization.GetText(Application.systemLanguage.ToString(), "infoscreen_subtitle_1");
 
         // Initialize the canvas list
         m_lCanvasList = new List<GameObject>();

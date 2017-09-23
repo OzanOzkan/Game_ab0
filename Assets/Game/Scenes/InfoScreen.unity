@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 390858365}
   - component: {fileID: 390858364}
   m_Layer: 5
-  m_Name: title_ab0
+  m_Name: game_title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,7 +408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.619, y: -553.78}
+  m_AnchoredPosition: {x: -1.619, y: -524.77}
   m_SizeDelta: {x: 183.3, y: 88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &707995915
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 802684748}
   - component: {fileID: 802684747}
   m_Layer: 5
-  m_Name: subtitle_Seviye
+  m_Name: infoscreen_subtitle_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 950480860}
   - component: {fileID: 950480859}
   m_Layer: 5
-  m_Name: txt_title
+  m_Name: infoscreen_info_1_title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,7 +933,7 @@ GameObject:
   - component: {fileID: 1194486622}
   - component: {fileID: 1194486621}
   m_Layer: 5
-  m_Name: txt_title
+  m_Name: infoscreen_info_4_title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1259,7 +1259,7 @@ GameObject:
   - component: {fileID: 1453875161}
   - component: {fileID: 1453875160}
   m_Layer: 5
-  m_Name: txt_title
+  m_Name: infoscreen_info_3_title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1333,7 +1333,7 @@ GameObject:
   - component: {fileID: 1564385096}
   - component: {fileID: 1564385095}
   m_Layer: 5
-  m_Name: txt_title
+  m_Name: infoscreen_info_2_title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1469,7 +1469,7 @@ GameObject:
   - component: {fileID: 1680538965}
   - component: {fileID: 1680538964}
   m_Layer: 5
-  m_Name: txt_body
+  m_Name: infoscreen_info_4_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1546,7 +1546,7 @@ GameObject:
   - component: {fileID: 1708916309}
   - component: {fileID: 1708916308}
   m_Layer: 5
-  m_Name: txt_body
+  m_Name: infoscreen_info_3_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1620,7 +1620,7 @@ GameObject:
   - component: {fileID: 1728580141}
   - component: {fileID: 1728580140}
   m_Layer: 5
-  m_Name: Text
+  m_Name: infoscreen_button_back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1694,7 +1694,7 @@ GameObject:
   - component: {fileID: 1739445391}
   - component: {fileID: 1739445390}
   m_Layer: 5
-  m_Name: txt_body
+  m_Name: infoscreen_info_2_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1920,7 +1920,7 @@ GameObject:
   - component: {fileID: 1874399692}
   - component: {fileID: 1874399691}
   m_Layer: 5
-  m_Name: txt_body
+  m_Name: infoscreen_info_1_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

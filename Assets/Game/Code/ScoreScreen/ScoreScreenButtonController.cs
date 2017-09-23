@@ -7,8 +7,6 @@ using GoogleMobileAds.Api;
 
 public class ScoreScreenButtonController : ScoreScreenBehavior
 {
-    private bool rewardBasedEventHandlersSet = false;
-
     public void onShareButtonPressed()
     {
 
@@ -16,44 +14,46 @@ public class ScoreScreenButtonController : ScoreScreenBehavior
 
     public void onMainMenuButtonPressed()
     {
-        if (Ad.Count == 1 || Ad.Count == 5)
+        if (Ad.Count == 3)
         {
-            Ad.Count++;
+            //// Unity Ads
+            //ShowOptions currentOptions = new ShowOptions();
+            //currentOptions.resultCallback = adVideoFinished;
+            //Advertisement.Show("endGame", currentOptions);
 
-            // Unity Ads
-            ShowOptions currentOptions = new ShowOptions();
-            currentOptions.resultCallback = adVideoFinished;
-            Advertisement.Show("endGame", currentOptions);
-
-            //Game.Ad.RequestRewardBasedVideo();
+            Game.Ad.RequestRewardBasedVideo();
 
             //if (Game.Ad.isAdRewarded)
             //{
-            //    Debug.Log("c");
-            //    Game.Ad.isAdRewarded = false;
-            //    SceneManager.LoadScene(Game.Scenes.MainMenu);
+            //    Debug.Log("Game.Ad.isAdRewarded: true");
+                //Game.Ad.isAdRewarded = false;
+                Ad.Count = 1;
+
+                //SceneManager.LoadScene(Game.Scenes.MainMenu);
             //}
             //else
             //{
-            //    Debug.Log("d");
+            //    Debug.Log("Game.Ad.isAdRewarded: false");
             //    SceneManager.LoadScene(Game.Scenes.ScoreScreen);
             //}
         }
         else
         {
             Ad.Count++;
-            SceneManager.LoadScene(Game.Scenes.MainMenu);
+            //SceneManager.LoadScene(Game.Scenes.MainMenu);
         }
+
+        SceneManager.LoadScene(Game.Scenes.MainMenu);
     }
 
-    // Unity Ads
-    void adVideoFinished(ShowResult result)
-    {
-        if (result == ShowResult.Finished)
-            SceneManager.LoadScene(Game.Scenes.MainMenu);
-        else
-            SceneManager.LoadScene(Game.Scenes.ScoreScreen);
-    }
+    //// Unity Ads
+    //void adVideoFinished(ShowResult result)
+    //{
+    //    if (result == ShowResult.Finished)
+    //        SceneManager.LoadScene(Game.Scenes.MainMenu);
+    //    else
+    //        SceneManager.LoadScene(Game.Scenes.ScoreScreen);
+    //}
 
 
 

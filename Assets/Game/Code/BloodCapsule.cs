@@ -63,7 +63,8 @@ public class BloodCapsule : IBloodType
 
                 Destroy(collision.gameObject);
 
-                m_soundManager.Play(m_audioCorrect);
+                if(Game.SoundSettings.IsSoundOn == 1)
+                    m_soundManager.Play(m_audioCorrect);
 
                 Instantiate(Resources.Load("Animations/blood_drop"), collision.transform.position, Quaternion.identity);
                 GameObject.Find("blood_drop(Clone)").AddComponent<AnimationManager>();
@@ -72,7 +73,9 @@ public class BloodCapsule : IBloodType
             }
             else
             {
-                m_soundManager.Play(m_audioIncorrect);
+                if (Game.SoundSettings.IsSoundOn == 1)
+                    m_soundManager.Play(m_audioIncorrect);
+
                 Destroy(GameObject.Find("backgroundMusic(Clone)"));
                 SceneManager.LoadScene(Game.Scenes.ScoreScreen);
             }
